@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .profile-container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        .profile-header {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .profile-header img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+        }
+        .profile-header h2 {
+            margin: 0;
+        }
+        .profile-info {
+            margin-bottom: 20px;
+        }
+        .profile-info p {
+            margin: 5px 0;
+        }
+        .dropdown, .profile-actions {
+            margin-top: 20px;
+        }
+        .dropdown select, .profile-actions button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        .profile-actions button.logout {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <img src="WhatsApp Image 2023-08-27 at 8.54.28 PM.jpeg" alt="Profile Photo">
+            <div>
+                <h2>ANUPAM SINGHA</h2>
+                <p>Email: johndoe@example.com</p>
+            </div>
+        </div>
+        <div class="profile-info">
+            <h3>Personal Information</h3>
+            <p>Address: 123 Main Street, City, Country</p>
+            <p>Phone Number: +1234567890</p>
+            <p>Gender:male</p>
+            </div>
+        </div>
+        <div class="profile-actions">
+            
+            <button onclick="window.location.href='orders.html'">Your Orders</button>
+            <button onclick="window.location.href='edit-profile.html'">Edit Profile</button>
+            <button onclick="window.location.href='account-settings.html'">Account Settings</button>
+            <button class="logout" onclick="window.location.href='logout.html'">Logout</button>
+        </div>
+    </div>
+</body>
+</html>

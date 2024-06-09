@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" type="image/png" href="8888.jpeg" sizes="64x64"/>
+  <title>Wear-iT - Bag</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="utils.css" rel="stylesheet" type="text/css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 0;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 40px;
+    }
+    .cart-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0 0 20px 0;
+    }
+    .cart-item {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cart-item h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+    .cart-item p {
+      margin: 0;
+      font-size: 16px;
+      color: #e74c3c;
+    }
+    .remove-button {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+    }
+    .remove-button:hover {
+      background-color: #c0392b;
+    }
+    .total-container {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    .payment-button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background-color: #27ae60;
+      color: white;
+      text-align: center;
+      border: none;
+      border-radius: 4px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .payment-button:hover {
+      background-color: #219150;
+    }
+    .empty-message {
+      text-align: center;
+      color: #888;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <h1>Your Bag</h1>
+    <ul class="cart-list" id="cart-list">
+      <!-- Cart items will be inserted here dynamically -->
+    </ul>
+    <div id="total-container" class="total-container" style="display: none;">
+      <p>Total Products: <span id="total-products">0</span></p>
+      <p>Total Cost: $<span id="total-cost">0.00</span></p>
+    </div>
+    <button class="payment-button" onclick="proceedToPayment()">Proceed to Payment</button>
+    <p class="empty-message" id="empty-message" style="display: none;">No items in your bag</p>
+  </main>
+
+  <script>
+    function loadCart() {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let cartList = document.getElementById('cart-list');
+      let totalContainer = document.getElementById('total-container');
+      let totalProducts = document.getElementById('total-products');
+      let totalCost = document.getElementById('total-cost');
+      let emptyMessage = document.getElementById('empty-message');
+      let totalProductCount = 0;
+      let totalPrice = 0;
+
+      cartList.innerHTML = '';
+      
+      if (cart.length === 0) {
+        emptyMessage.style.display = 'block';
+        totalContainer.style.display = 'none';
+      } else {
+        emptyMessage.style.display = 'none';
+        totalContainer.style.display = 'block';
+        
+        cart.forEach((item, index) => {
+          let cartItem = document.createElement('li');
+          cartItem.className = 'cart-item';
+          cartItem.innerHTML = `<h2>${item.name}</h2>
+                                <p>$${item.price.toFixed(2)}</p>
+                                <button class="remove-button" onclick="removeFromBag(${index})">Remove</button>`;
+          cartList.appendChild(cartItem);
+          totalProductCount++;
+          totalPrice += item.price;
+        });
+
+        totalProducts.innerText = totalProductCount;
+        totalCost.innerText = totalPrice.toFixed(2);
+      }
+    }
+
+    function removeFromBag(index) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      loadCart();
+    }
+
+    function proceedToPayment() {
+      window.location.href = 'payment.html';
+    }
+
+    // Load cart items when the page loads
+    window.onload = loadCart;
+  </script>
+</body>
+</html>
